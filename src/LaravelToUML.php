@@ -147,7 +147,7 @@ class LaravelToUML {
 
         $classReflection   = new ReflectionClass($fullClassName);
         $traitMethods      = $this->getTraits($fullClassName);
-        
+
         $this->classes[$fullClassName] = [
             'name'              => $className,
             'properties'        => $this->getProperties($classReflection, $fullClassName),
@@ -321,7 +321,7 @@ class LaravelToUML {
     protected function namespaceToPath($namespace, $append = DIRECTORY_SEPARATOR) {
         if(Str::startsWith($namespace, '\\')) $namespace = substr($namespace, 1);
         $namespace = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
-        $namespace = str_replace('App', 'app', $namespace);
+        $namespace = preg_replace('/App/', 'app', $namespace, 1);
 
         return base_path() . DIRECTORY_SEPARATOR . $namespace . $append;
     }
