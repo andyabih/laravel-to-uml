@@ -1,0 +1,32 @@
+{
+    "name": "andyabih/laravel-to-uml",
+    "description": "Automagically generate UML diagrams of your Laravel code.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Abi Haidar",
+            "email": "andy@yllw.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Andyabih\\LaravelToUML\\": "src"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "6.0"
+    },
+    
+  "extra": {
+    "laravel": {
+        "providers": [
+            "Andyabih\\LaravelToUML\\LaravelToUMLServiceProvider"
+        ],
+        
+        "aliases": {
+            "LaravelToUML": "Andyabih\\LaravelToUML\\Facades\\LaravelToUML"
+        }
+    }
+}
+}
