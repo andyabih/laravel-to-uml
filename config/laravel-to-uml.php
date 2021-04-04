@@ -2,6 +2,11 @@
 
 return [
     /**
+     * Default route to see the UML diagram.
+     */
+    'route' => '/uml',
+    
+    /**
      * You can turn on or off the indexing of specific types
      * of classes. By default, LTU processes only controllers 
      * and models.

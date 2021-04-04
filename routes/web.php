@@ -3,4 +3,4 @@
 use Andyabih\LaravelToUML\Http\Controllers\LaravelToUMLController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/uml', [LaravelToUMLController::class, 'index']);
+Route::get(config('laravel-to-uml.route'), [LaravelToUMLController::class, 'index']);
