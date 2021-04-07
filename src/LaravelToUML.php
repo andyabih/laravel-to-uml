@@ -55,6 +55,9 @@ class LaravelToUML {
             $namespace = $this->prefixWithApp(
                 $this->removePHPExtension($file->getRelativePathname())
             );
+            $namespace = str_replace("/", "\\", $namespace);
+            if(Str::startsWith($namespace, '\\')) $namespace = substr($namespace, 1);
+            
             $this->classes[$namespace] = [];
         }
     }
@@ -67,7 +70,6 @@ class LaravelToUML {
      */
     protected function loadFiles($files) {
         $this->preloadFiles($files);
-
         foreach($files as $file) {
             $namespace = $this->prefixWithApp(
                 $this->removePHPExtension($file->getRelativePathname())
@@ -334,7 +336,7 @@ class LaravelToUML {
      */
     protected function getNamespaceFromPath($path) {
         $path = str_replace(base_path(), "", $path);
-        if(Str::startsWith($path, '\\')) $path = substr($path, 1);
+        if(Str::startsWith($path, '\\') || Str::startsWith($path, '/')) $path = substr($path, 1);
         $path = str_replace(".php", "", $path);
         $explodedPath = explode(DIRECTORY_SEPARATOR, $path);
         $explodedPath = array_map(function($p) {
