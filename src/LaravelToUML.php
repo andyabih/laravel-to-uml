@@ -55,9 +55,10 @@ class LaravelToUML {
             $namespace = $this->prefixWithApp(
                 $this->removePHPExtension($file->getRelativePathname())
             );
+
             $namespace = str_replace("/", "\\", $namespace);
             if(Str::startsWith($namespace, '\\')) $namespace = substr($namespace, 1);
-            
+
             $this->classes[$namespace] = [];
         }
     }
@@ -88,6 +89,8 @@ class LaravelToUML {
     public function getSource() {
         $sources = [...$this->getStyling()];
         foreach($this->classes as $c) {
+            if(! isset($c['properties'])) continue;
+            
             $properties = [];
             $methods = [];
             
@@ -147,6 +150,8 @@ class LaravelToUML {
         $fullClassName = $this->getNamespaceFromPath($classPath);
         $fileLines     = $this->getLinesInFile($classPath);
 
+        if(! class_exists($fullClassName)) return false;
+
         $classReflection   = new ReflectionClass($fullClassName);
         $traitMethods      = $this->getTraits($fullClassName);
 
@@ -171,7 +176,7 @@ class LaravelToUML {
             if(Str::startsWith($line, 'use ')) {
                 $explodedName = explode(" ", $line);
                 $classNamespace = str_replace(";", "", end($explodedName));
-                
+
                 if(!in_array($classNamespace, array_keys($this->classes))) continue; // Only track relationships from other tracked classes
 
                 $namespaceExploded = explode("\\", $line);
