@@ -202,6 +202,10 @@ class LaravelToUML {
                     if(!isset($matches[1])) {
                         preg_match("/{$relationship}\((.*)\,/", $line, $matches);
                     }
+                    if(empty($matches))
+                    {
+                        continue;
+                    }
                     $match                 = explode(",", $matches[1]);
                     $relationshipClass     = trim($match[0], '"');
                     $relationshipClass     = trim($relationshipClass, "'");
