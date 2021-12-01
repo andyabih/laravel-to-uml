@@ -198,9 +198,9 @@ class LaravelToUML {
         foreach($fileLines as $line) {
             foreach($this->relationships as $relationship => $direction) {
                 if(Str::startsWith($line, 'return $this->'.$relationship.'(')) {
-                    preg_match("/{$relationship}\((.*)\)/", $line, $matches);
+                    preg_match("/{$relationship}\((.*?)\)/", $line, $matches);
                     if(!isset($matches[1])) {
-                        preg_match("/{$relationship}\((.*)\,/", $line, $matches);
+                        preg_match("/{$relationship}\((.*?)\,/", $line, $matches);
                     }
                     $match                 = explode(",", $matches[1]);
                     $relationshipClass     = trim($match[0], '"');
