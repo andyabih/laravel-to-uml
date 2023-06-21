@@ -35,3 +35,6 @@ use App\Models\Post;
 // Using it directly in the code without the use operator won't.
 $posts = \App\Models\Post::all();
 ```
+
+## Credits
+- [Yellow Digital](https://yllwdigital.com)
